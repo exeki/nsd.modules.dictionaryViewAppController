@@ -90,6 +90,8 @@ abstract class Constants {
     static final EXPORT_FILE_LIMIT = 10000
     static final Boolean ENABLE_LOGGING = false
     static final String LOG_PREFIX = 'dictionaryViewAppController'
+    static final List<String> USER_GROUPS = ['C3_admin']
+
 
 }
 
@@ -247,7 +249,7 @@ abstract class Utilities {
         else return Constants.LICENSES.any { ((String) user.license).contains(it) }
     }
 
-    static Preferences prefs = new Preferences().assertUserIsLicensed()
+    static Preferences prefs = new Preferences().assertUserGroup(Constants.USER_GROUPS)
 }
 
 abstract class QueryBuilderService {
@@ -724,7 +726,6 @@ class DataService {
         }
         return dtos
     }
-
 
 
     static Boolean isSearched(Dto.Element element, Dto.Filter filter) {
